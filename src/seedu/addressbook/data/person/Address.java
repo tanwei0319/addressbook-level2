@@ -17,11 +17,12 @@ public class Address {
     														+ "<BLOCK NUMBER>, <STREET NUMBER>, #<UNIT NUMBER>, <POSTAL CODE>";
     public static final String ADDRESS_DELIMITER = ",";
     
-    public static final int TOTAL_PARTS = 4;
-    public static final int BLOCK_INDEX = 0;
-    public static final int STREET_INDEX = 1;
-    public static final int UNIT_INDEX = 2;
-    public static final int POSTALCODE_INDEX = 3;
+    public static final int ADDRESS_TOTAL_PARTS = 4;
+    
+    public static final int ADDRESS_BLOCK_INDEX = 0;
+    public static final int ADDRESS_STREET_INDEX = 1;
+    public static final int ADDRESS_UNIT_INDEX = 2;
+    public static final int ADDRESS_POSTALCODE_INDEX = 3;
 
     private boolean isPrivate;
 
@@ -49,10 +50,10 @@ public class Address {
 	private void trimAddress(String address) {
 		String[] trimmedAddress = address.split(ADDRESS_DELIMITER);
 
-    	this.block = new Block(trimmedAddress[BLOCK_INDEX].trim());
-    	this.street = new Street(trimmedAddress[STREET_INDEX].trim());
-    	this.unit = new Unit(trimmedAddress[UNIT_INDEX].trim());
-    	this.postalCode = new PostalCode(trimmedAddress[POSTALCODE_INDEX].trim());
+    	this.block = new Block(trimmedAddress[ADDRESS_BLOCK_INDEX].trim());
+    	this.street = new Street(trimmedAddress[ADDRESS_STREET_INDEX].trim());
+    	this.unit = new Unit(trimmedAddress[ADDRESS_UNIT_INDEX].trim());
+    	this.postalCode = new PostalCode(trimmedAddress[ADDRESS_POSTALCODE_INDEX].trim());
     	
 	}
 
@@ -63,17 +64,17 @@ public class Address {
     	String[] trimmedAddress = test.split(ADDRESS_DELIMITER);
     	
     	// Not all info required are available 
-    	if (trimmedAddress.length != TOTAL_PARTS) {
+    	if (trimmedAddress.length != ADDRESS_TOTAL_PARTS) {
     		return false;
     	}
     	
     	// Unit number does not follow required #<UNIT_NUMBER> format
-    	if (trimmedAddress[UNIT_INDEX].trim().charAt(0) != '#') {
+    	if (trimmedAddress[ADDRESS_UNIT_INDEX].trim().charAt(0) != '#') {
     		return false;
     	}
     	
     	// Postal code is not 6-digit integer
-    	int postalCodeInt = Integer.parseInt(trimmedAddress[POSTALCODE_INDEX].trim());
+    	int postalCodeInt = Integer.parseInt(trimmedAddress[ADDRESS_POSTALCODE_INDEX].trim());
     	if (postalCodeInt < 100000 || postalCodeInt > 999999) {
     		return false;
     	}
