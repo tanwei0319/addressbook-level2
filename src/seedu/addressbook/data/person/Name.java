@@ -60,4 +60,18 @@ public class Name {
         return fullName.hashCode();
     }
 
+    /**
+     * Returns true of the other name is very similar to this name.
+     * Two names are considered similar if one is a subset of another,
+     * or both names are the same strings but in different case/order,
+     * or both are not null.
+     */
+	public boolean isSimilar(Name other) {
+		if (other == null) {
+			return false;
+		}
+		
+		return true;
+	}
+
 }
