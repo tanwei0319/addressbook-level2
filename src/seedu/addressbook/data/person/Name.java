@@ -67,9 +67,16 @@ public class Name {
      * or both are not null.
      */
 	public boolean isSimilar(Name other) {
+		// test for null
 		if (other == null) {
 			return false;
+		} else if (!(this.toString().contains(other.toString())) &&
+					!(other.toString().contains(this.toString()))) {
+		// test for subset
+			return false;		
 		}
+		
+		
 		
 		return true;
 	}
