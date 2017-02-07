@@ -23,5 +23,16 @@ public class NameTest {
 		assertTrue(subsetName.isSimilar(supersetName));
 		assertFalse(supersetName.isSimilar(otherName));
 	}
+	
+	@Test
+	public void isSimilar_testDifferentCase() throws IllegalValueException {
+		Name upperCaseName = new Name("JOHN SMITH");
+		Name mixedCaseName = new Name("joHn sMITh");
+		Name lowerCaseName = new Name("john smith");
+		assertTrue(upperCaseName.isSimilar(lowerCaseName));
+		assertTrue(lowerCaseName.isSimilar(upperCaseName));
+		assertTrue(mixedCaseName.isSimilar(lowerCaseName));
+		assertTrue(mixedCaseName.isSimilar(upperCaseName));
+	}
 
 }

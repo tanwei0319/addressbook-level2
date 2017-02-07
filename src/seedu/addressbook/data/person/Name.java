@@ -67,16 +67,15 @@ public class Name {
      * or both are not null.
      */
 	public boolean isSimilar(Name other) {
-		// test for null
+		
 		if (other == null) {
+			// test for null
 			return false;
-		} else if (!(this.toString().contains(other.toString())) &&
-					!(other.toString().contains(this.toString()))) {
-		// test for subset
+		} else if (!(this.toString().toLowerCase().contains(other.toString().toLowerCase())) 
+					&& !(other.toString().toLowerCase().contains(this.toString().toLowerCase()))) {
+			// test for subset and different cases
 			return false;		
-		}
-		
-		
+		} 
 		
 		return true;
 	}
