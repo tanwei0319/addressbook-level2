@@ -1,11 +1,14 @@
 package seedu.addressbook.data;
 
 import seedu.addressbook.data.person.*;
+
 import seedu.addressbook.data.person.UniquePersonList.*;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.data.tag.UniqueTagList.*;
 import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.data.tag.Tagging;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -22,6 +25,7 @@ public class AddressBook {
 
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
+    private final ArrayList<Tagging> taggings;
 
     /**
      * Creates an empty address book.
@@ -29,6 +33,7 @@ public class AddressBook {
     public AddressBook() {
         allPersons = new UniquePersonList();
         allTags = new UniqueTagList();
+        taggings = new ArrayList<Tagging> ();
     }
 
     /**
@@ -41,6 +46,7 @@ public class AddressBook {
     public AddressBook(UniquePersonList persons, UniqueTagList tags) {
         this.allPersons = new UniquePersonList(persons);
         this.allTags = new UniqueTagList(tags);
+        this.taggings = new ArrayList<Tagging> ();
         for (Person p : allPersons) {
             syncTagsWithMasterList(p);
         }
@@ -150,5 +156,34 @@ public class AddressBook {
                 || (other instanceof AddressBook // instanceof handles nulls
                         && this.allPersons.equals(((AddressBook) other).allPersons)
                         && this.allTags.equals(((AddressBook) other).allTags));
+    }
+    
+    /**
+     * Adds the addition to taggings ArrayList 
+     * @param Person object
+     * @param Tag object
+     */
+    @SuppressWarnings("unused")
+	private void updateAddedTagging(Person person, Tag tag) {
+    	taggings.add(new Tagging(person, tag, true));
+    }
+    
+    /**
+     * Adds the deletion to taggings ArrayList
+     * @param Person object
+     * @param Tag object
+     */
+    @SuppressWarnings("unused")
+	private void updateDeletedTagging(Person person, Tag tag) {
+    	taggings.add(new Tagging(person, tag, false));
+    }
+
+    /**
+     * Prints the taggings ArrayList
+     */
+    public void printTaggings() {
+    	for (int i = 0; i < taggings.size(); i++) {
+    		System.out.println(taggings.get(i).toString());
+    	}
     }
 }
