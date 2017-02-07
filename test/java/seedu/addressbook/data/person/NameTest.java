@@ -34,5 +34,16 @@ public class NameTest {
 		assertTrue(mixedCaseName.isSimilar(lowerCaseName));
 		assertTrue(mixedCaseName.isSimilar(upperCaseName));
 	}
+	
+	@Test
+	public void isSimilar_testDifferentOrder() throws IllegalValueException {
+		Name normalName = new Name("Betsy Dickson");
+		Name inverseName = new Name("Dickson Betsy");
+		Name mixedCaseNormalName = new Name("BETSY DickSon");
+		Name lowerCaseInverseName = new Name("dickson betsy");
+		assertTrue(normalName.isSimilar(inverseName));
+		assertTrue(normalName.isSimilar(lowerCaseInverseName));
+		assertTrue(inverseName.isSimilar(mixedCaseNormalName));
+	}
 
 }

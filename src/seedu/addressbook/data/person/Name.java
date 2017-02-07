@@ -2,6 +2,7 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.exception.IllegalValueException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,19 +66,38 @@ public class Name {
      * Two names are considered similar if one is a subset of another,
      * or both names are the same strings but in different case/order,
      * or both are not null.
+     * Precondition: Each name has a maximum of three parts (i.e Adam Brown Smith)
      */
 	public boolean isSimilar(Name other) {
 		
 		if (other == null) {
 			// test for null
 			return false;
-		} else if (!(this.toString().toLowerCase().contains(other.toString().toLowerCase())) 
-					&& !(other.toString().toLowerCase().contains(this.toString().toLowerCase()))) {
-			// test for subset and different cases
-			return false;		
 		} 
 		
-		return true;
+		String thisName = this.toString().toLowerCase();
+		String otherName = other.toString().toLowerCase();
+		
+		if (thisName.contains(otherName) || otherName.contains(thisName)) {
+			// test for subset and different cases
+			return true;		
+		} else {
+			// test for different order
+			String[] thisNameElements = thisName.split(" ");
+			String[] otherNameElements = otherName.split(" ");
+
+			ArrayList<String> thisNameArrayList = new ArrayList<String> (Arrays.asList(thisNameElements));
+			ArrayList<String> otherNameArrayList = new ArrayList<String> (Arrays.asList(otherNameElements));
+			
+			for (int i = 0; i < thisNameArrayList.size(); i++) {
+				if (!thisNameArrayList.contains(otherNameArrayList.get(i))) {
+					return false;
+				}
+			}
+			
+			return true;
+		}
+		
 	}
 
 }
